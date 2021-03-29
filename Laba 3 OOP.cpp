@@ -1,10 +1,11 @@
 #include <iostream>
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 using namespace std;
 
 class Cone {
 private:
-    int *radius, *height;
+    int* radius, * height;
 
 public:
     Cone() {
@@ -22,12 +23,12 @@ public:
         *height = Height;
     }
 
-    Cone(const Cone &obj) {
+    Cone(const Cone& obj) {
         cout << "Викликаємо конструктор копіювання..." << endl;
         radius = new int;
         height = new int;
-        *this -> radius = *obj.radius;
-        *this -> height = *obj.height;
+        *this->radius = *obj.radius;
+        *this->height = *obj.height;
     }
 
     ~Cone() {
@@ -78,7 +79,7 @@ public:
 Cone operator+ (const Cone& obj1, const Cone& obj2) {
     int resRad, resHi;
     resRad = obj1.GetRadius() + obj2.GetRadius();
-    resHi  = obj1.GetHeight() + obj2.GetHeight();
+    resHi = obj1.GetHeight() + obj2.GetHeight();
     Cone result(resRad, resHi);
     cout << "\nСума радіусів двох конусів: " << resRad << "\nСума висот    двох конусів: " << resHi << "\n\n";
     return result;
@@ -96,11 +97,11 @@ bool operator < (const Cone& obj1, const Cone& obj2) {
     return obj1.Volume() < obj2.Volume();
 }
 
-Cone Average(const Cone &obj1, const Cone &obj2) {
+Cone Average(const Cone& obj1, const Cone& obj2) {
     double resAverRadCons, resAverHiCons;
     int resAverRad, resAverHi;
-    resAverRadCons = (obj1.GetRadius() + (double)obj2.GetRadius())/2;
-    resAverHiCons  = (obj1.GetHeight() + (double)obj2.GetHeight())/2;
+    resAverRadCons = (obj1.GetRadius() + (double)obj2.GetRadius()) / 2;
+    resAverHiCons = (obj1.GetHeight() + (double)obj2.GetHeight()) / 2;
     cout << "Середнє арифметичне радіусів конусів: " << resAverRadCons << "\nСереднє арифметичне висот конусів: " << resAverHiCons << "\n\n";
     resAverRad = (int)resAverRadCons;
     resAverHi = (int)resAverHiCons;
@@ -113,7 +114,7 @@ ostream& operator<<(ostream& os, const Cone& obj) {
     return os;
 }
 
-istream& operator>>(istream& in, const Cone &obj) {
+istream& operator>>(istream& in, const Cone& obj) {
     int Radius, Height;
     cout << "Введіть радіус: ";
     in >> Radius;
@@ -140,21 +141,21 @@ int main() {
     cout << "Об'єм конуса: " << obj1.Volume() << "\n";
     cout << "Площа повної поверхні конуса: " << obj1.Area() << "\n\n";
 
-    Cone *obj2;
+    Cone* obj2;
     obj2 = new Cone;
     cout << "Введіть радіус: ";
     cin >> rad2;
-    obj2 -> SetRadius(rad2);
+    obj2->SetRadius(rad2);
     cout << "Введіть висоту: ";
     cin >> hi2;
-    obj2 -> SetHeight(hi2);
-    obj2 -> Print();
-    cout << "Об'єм конуса: " << obj2 -> Volume() << "\n";
-    cout << "Площа повної поверхні конуса: " << obj2 -> Area() << "\n\n";
+    obj2->SetHeight(hi2);
+    obj2->Print();
+    cout << "Об'єм конуса: " << obj2->Volume() << "\n";
+    cout << "Площа повної поверхні конуса: " << obj2->Area() << "\n\n";
 
 
-bool boolRes1 = obj1.Volume() >  obj2 -> Volume();
-    bool boolRes2 = obj1.Volume() == obj2 -> Volume();
+    bool boolRes1 = obj1.Volume() > obj2->Volume();
+    bool boolRes2 = obj1.Volume() == obj2->Volume();
 
     if (boolRes2) cout << "Об'єм конуса 1 дорівнює об'єму конуса 2.\n";
     else cout << "Об'єм конуса 1 " << (boolRes1 ? "більший" : "менший") << ", ніж об'єм конуса 2.\n";
@@ -162,38 +163,38 @@ bool boolRes1 = obj1.Volume() >  obj2 -> Volume();
     Cone objSum = obj1 + *obj2;
     Cone objAver = Average(obj1, *obj2);
 
-    Cone obj3(6,8);
-    Cone *arrCone[] = {&obj1, obj2, &obj3};
+    Cone obj3(6, 8);
+    Cone* arrCone[] = { &obj1, obj2, &obj3 };
 
     int k1, k2, kst, i;
-    kst = sizeof(arrCone)/sizeof(*arrCone);
-    Cone *arrConeTemp;
+    kst = sizeof(arrCone) / sizeof(*arrCone);
+    Cone* arrConeTemp;
 
     /* Insertion Sort */
     cout << "\n/* Insertion Sort */\n";
     for (k1 = 1; k1 < kst; k1++) {
-        arrConeTemp = *(arrCone+k1);
-        k2 = k1-1;
+        arrConeTemp = *(arrCone + k1);
+        k2 = k1 - 1;
         while (k2 >= 0 and (*arrConeTemp < *arrCone[k2])) {
-            (arrCone[k2+1]) = arrCone[k2];
+            (arrCone[k2 + 1]) = arrCone[k2];
             k2--;
         }
-        arrCone[k2+1] = arrConeTemp;
+        arrCone[k2 + 1] = arrConeTemp;
     }
 
     for (i = 0; i < kst; i++) {
-        cout << *(arrCone[i]) << " - Volume: " << arrCone[i] -> Volume() << " \n";
+        cout << *(arrCone[i]) << " - Volume: " << arrCone[i]->Volume() << " \n";
     }
 
     int sumRadius = 0, sumHeight = 0;
     double resRadAver, resHiAver;
 
     for (i = 0; i < kst; i++) {
-        sumRadius += arrCone[i] -> GetRadius();
-        sumHeight += arrCone[i] -> GetHeight();
+        sumRadius += arrCone[i]->GetRadius();
+        sumHeight += arrCone[i]->GetHeight();
     }
     resRadAver = (double)sumRadius / kst;
-    resHiAver  = (double)sumHeight / kst;
+    resHiAver = (double)sumHeight / kst;
 
     cout << "\nСереднє арифметичне радіусів конусів у масиві: " << resRadAver << "\nСереднє арифметичне    висот конусів у масиві: " << resHiAver << "\n\n";
 
@@ -201,14 +202,14 @@ bool boolRes1 = obj1.Volume() >  obj2 -> Volume();
     cin >> objTest;
     objTest.Print();
 
-    cout <<  obj1     << " - obj1\n";
-    cout << *obj2     << " - obj2\n";
-    cout <<  obj3     << " - obj3\n";
-    cout <<  objSum   << " - objSum\n";
-    cout <<  objAver  << " - objAver\n";
-    cout <<  objTest  << " - objTest\n";
-    
+    cout << obj1 << " - obj1\n";
+    cout << *obj2 << " - obj2\n";
+    cout << obj3 << " - obj3\n";
+    cout << objSum << " - objSum\n";
+    cout << objAver << " - objAver\n";
+    cout << objTest << " - objTest\n";
+
     delete obj2;
-    getchar();getchar();
+    getchar(); getchar();
     return 0;
 }
