@@ -151,6 +151,8 @@ int main() {
     obj2 -> Print();
     cout << "Об'єм конуса: " << obj2 -> Volume() << "\n";
     cout << "Площа повної поверхні конуса: " << obj2 -> Area() << "\n\n";
+
+
 bool boolRes1 = obj1.Volume() >  obj2 -> Volume();
     bool boolRes2 = obj1.Volume() == obj2 -> Volume();
 
